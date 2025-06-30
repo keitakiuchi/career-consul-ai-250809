@@ -1,0 +1,122 @@
+name: Claude AI Assistant CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  issue_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Environment Check
+      run: |
+        echo "🔍 環境チェックを実行中..."
+        echo "✅ Python バージョン: $(python --version)"
+        echo "✅ pip バージョン: $(pip --version)"
+        echo "✅ 作業ディレクトリ: $(pwd)"
+        echo "✅ 依存関係の確認..."
+        python -c "import sys; print('✅ Python パス:', sys.path)"
+    
+    - name: Run tests
+      run: |
+        echo "🧪 テストを実行中..."
+        python -m pytest tests/ --cov=src --cov-report=xml
+    
+    - name: Run linting
+      run: |
+        echo "🔍 コード品質チェックを実行中..."
+        flake8 src/ --max-line-length=88 --count --select=E9,F63,F7,F82 --show-source --statistics
+        black --check src/ --diff
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  claude-assistant:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Environment Check
+      run: |
+        echo "🔍 Claude AI アシスタント用の環境チェックを実行中..."
+        echo "✅ Python 環境: $(python --version)"
+        echo "✅ 依存関係の確認..."
+        python -c "import requests, json, os; print('✅ 必要なライブラリが利用可能')"
+    
+    - name: Claude AI Assistant
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🤖 Claude AI アシスタントを実行中..."
+        # Claude AI アシスタントの処理をここに実装
+        # 実際の実装はプロジェクトの要件に応じて調整
+
+  claude-review:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Environment Check
+      run: |
+        echo "🔍 Claude AI レビュー用の環境チェックを実行中..."
+        echo "✅ Python 環境: $(python --version)"
+        echo "✅ 依存関係の確認..."
+        python -c "import requests, json, os; print('✅ 必要なライブラリが利用可能')"
+    
+    - name: Claude AI Review
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🤖 Claude AI レビューを実行中..."
+        # Claude AI レビューの処理をここに実装
+        # 実際の実装はプロジェクトの要件に応じて調整

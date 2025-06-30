@@ -1,0 +1,80 @@
+name: Codex TDD Workflow
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+
+jobs:
+  codex-tdd:
+    runs-on: ubuntu-latest
+    if: |
+      contains(github.event.issue.title, '@codex') ||
+      contains(github.event.issue.body, '@codex') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@codex'))
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Environment Check
+      run: |
+        echo "🔍 Codex TDD 用の環境チェックを実行中..."
+        echo "✅ Python バージョン: $(python --version)"
+        echo "✅ pip バージョン: $(pip --version)"
+        echo "✅ 作業ディレクトリ: $(pwd)"
+        echo "✅ 依存関係の確認..."
+        python -c "import sys; print('✅ Python パス:', sys.path)"
+        echo "✅ テスト環境の確認..."
+        python -c "import pytest; print('✅ pytest バージョン:', pytest.__version__)"
+    
+    - name: Run Codex TDD
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        echo "🤖 Codex TDD を実行中..."
+        # Codex TDD の処理をここに実装
+        # 実際の実装はプロジェクトの要件に応じて調整
+        
+        # 例: テスト駆動開発のワークフロー
+        echo "📝 テスト駆動開発ワークフロー開始..."
+        echo "1. 失敗するテストを作成"
+        echo "2. 最小限のコードを実装"
+        echo "3. テストが通ることを確認"
+        echo "4. コードをリファクタリング"
+    
+    - name: Run tests after TDD
+      run: |
+        echo "🧪 TDD 後のテストを実行中..."
+        if [ -d "tests" ]; then
+          python -m pytest tests/ -v --cov=src --cov-report=xml
+        else
+          echo "⚠️ テストディレクトリが見つかりません"
+        fi
+    
+    - name: Code quality check
+      run: |
+        echo "🔍 コード品質チェックを実行中..."
+        if [ -d "src" ]; then
+          flake8 src/ --max-line-length=88 --count --select=E9,F63,F7,F82 --show-source --statistics || true
+          black --check src/ --diff || true
+        else
+          echo "⚠️ ソースディレクトリが見つかりません"
+        fi
+    
+    - name: Create pull request if changes
+      if: success()
+      run: |
+        echo "📝 変更がある場合はプルリクエストを作成..."
+        # 実際のプルリクエスト作成ロジックをここに実装
