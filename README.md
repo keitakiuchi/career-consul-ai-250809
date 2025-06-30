@@ -1,25 +1,26 @@
-# Template Vibe Coding - AI駆動コーディングテンプレート
+# キャリアコンサルティングセミナー準備リポジトリ
 
-このリポジトリは、vibe-codingやai-driven-codingを始めるためのテンプレートレポジトリです。最新の知見に基づいて汎用的なルールファイルを貯蔵し、他のプロジェクトで再利用できるように設計されています。
+このリポジトリは、キャリアコンサルティングに関するセミナーの準備と資料管理のためのプロジェクトです。AIツールを活用して効率的にセミナー資料を作成し、管理するためのテンプレートとルールを提供します。
 
 ## 🎯 目的
 
-- **AI駆動コーディングの標準化**: 様々なAIツール向けのルールファイルを一元管理
-- **プロジェクト間の一貫性**: 複数のプロジェクトで同じルールセットを共有
-- **効率的な開発**: ルールファイルの自動集約と更新機能
+- **セミナー資料の効率的な作成**: AIツールを活用した資料作成の自動化
+- **一貫性のあるコンテンツ**: 複数のセミナーで統一された品質の資料を提供
+- **知識の蓄積と共有**: キャリアコンサルティングの知見を体系的に管理
+- **参加者体験の向上**: インタラクティブで価値のあるセミナーコンテンツの提供
 
 ## 🚀 クイックスタート
 
 ### 1. リポジトリのクローン
 ```bash
-git clone https://github.com/your-username/template-vibe-coding.git
-cd template-vibe-coding
+git clone https://github.com/your-username/career-consulting-seminar.git
+cd career-consulting-seminar
 ```
 
 ### 2. 環境チェック（必須）
 ```bash
 # 仮想環境のアクティベート
-conda activate py-review  # または適切な環境名
+conda activate career-seminar  # または適切な環境名
 
 # 環境チェックスクリプトの実行
 python utility/check_env.py
@@ -33,10 +34,10 @@ pip install -r requirements.txt
 ## 📁 プロジェクト構造
 
 ```
-template-vibe-coding/
+career-consulting-seminar/
 ├── .claude/                    # Claude Code CLI設定
 │   ├── commands/
-│   │   └── gemini-search.md
+│   │   └── career-research.md
 │   └── claude.yml
 ├── .cursor/                    # Cursor設定
 │   └── rules/
@@ -44,18 +45,26 @@ template-vibe-coding/
 ├── .github/                    # GitHub Actions設定
 │   └── workflows/
 │       ├── claude.yml
-│       └── codex-tdd.yml
+│       └── content-generation.yml
 ├── utility/                    # ユーティリティツール
 │   └── check_env.py           # 環境チェックスクリプト
 ├── sharing/                    # 共有ツール
-│   └── ai-driven-coding.py    # ルールファイル集約スクリプト
-├── workbench/                  # 実験用ワークスペース
-├── plan/                       # プロジェクト計画
-├── results/                    # 実行結果
+│   └── career-content-generator.py    # コンテンツ生成スクリプト
+├── seminars/                   # セミナー資料
+│   ├── templates/             # セミナーテンプレート
+│   ├── materials/             # セミナー資料
+│   └── exercises/             # 演習・ワークシート
+├── research/                   # リサーチ資料
+│   ├── industry-trends/       # 業界動向
+│   ├── case-studies/          # 事例研究
+│   └── best-practices/        # ベストプラクティス
+├── tools/                      # セミナー用ツール
+│   ├── assessment-tools/      # アセスメントツール
+│   └── interactive-tools/     # インタラクティブツール
 ├── CLAUDE.md                   # Claude使用ガイド
 ├── GEMINI.md                   # Gemini使用ガイド
 ├── AGENTS.md                   # AIエージェント使用ガイド
-├── ai-driven-coding.md         # 集約されたルールファイル
+├── career-consulting-rules.md  # 集約されたルールファイル
 ├── requirements.txt            # Python依存関係
 └── README.md                   # このファイル
 ```
@@ -63,7 +72,7 @@ template-vibe-coding/
 ## ⚠️ 重要な注意事項
 
 ### 環境チェックの実行
-**このプロジェクトでコードを実行する前に、必ず環境チェックスクリプトを実行してください：**
+**このプロジェクトでコンテンツを生成する前に、必ず環境チェックスクリプトを実行してください：**
 
 ```bash
 python utility/check_env.py
@@ -75,107 +84,106 @@ python utility/check_env.py
 - ✅ 設定ファイルが存在するか
 
 ### 仮想環境の管理
-- **Pythonプロジェクト**: `conda activate py-review` または適切な仮想環境
+- **Pythonプロジェクト**: `conda activate career-seminar` または適切な仮想環境
 - **Node.jsプロジェクト**: `npm install` で依存関係をインストール
 - **環境変数**: APIキーは `.env` ファイルで管理
 
-## 📋 ルールファイル構成
+## 📋 セミナーコンテンツ構成
 
-### Claude Code CLI用
-- `.claude/commands/gemini-search.md` - Gemini検索コマンド設定
-- `.claude/claude.yml` - Claude AIアシスタント設定
-- `CLAUDE.md` - Claude使用ガイドライン
+### セミナーテンプレート
+- `seminars/templates/` - 各種セミナーのテンプレート
+- `seminars/materials/` - 実際のセミナー資料
+- `seminars/exercises/` - 参加者用演習・ワークシート
 
-### Claude Code GitHub Actions用
-- `.github/workflows/claude.yml` - GitHub Actions CI/CD設定
+### リサーチ資料
+- `research/industry-trends/` - 業界動向・市場分析
+- `research/case-studies/` - 成功事例・失敗事例
+- `research/best-practices/` - キャリアコンサルティングのベストプラクティス
 
-### OpenAI Codex用
-- `.github/workflows/codex-tdd.yml` - TDDワークフロー設定
-- `AGENTS.md` - AIエージェント使用ガイドライン
+### ツール類
+- `tools/assessment-tools/` - キャリアアセスメントツール
+- `tools/interactive-tools/` - インタラクティブなセミナー用ツール
 
-### Gemini CLI用
-- `GEMINI.md` - Gemini使用ガイドライン
+## 🔄 コンテンツ生成機能
 
-### Cursor用
-- `.cursor/rules/cursorrules.md` - Cursor開発ルール
+### career-content-generator.py
 
-## 🔄 ルールファイル集約機能
-
-### ai-driven-coding.py
-
-`sharing/ai-driven-coding.py`を使用することで、このリポジトリのルールファイルを`ai-driven-coding.md`に集約し、他のリポジトリで参照できます。
+`sharing/career-content-generator.py`を使用することで、AIを活用してセミナーコンテンツを効率的に生成できます。
 
 ```bash
-# ルールファイルの集約
-python sharing/ai-driven-coding.py
+# セミナーコンテンツの生成
+python sharing/career-content-generator.py
 
-# 生成されたai-driven-coding.mdを他のプロジェクトで使用
+# 特定のテーマでコンテンツ生成
+python sharing/career-content-generator.py --theme "キャリア転換"
 ```
 
 ### 使用方法
 
-1. **ルールファイルの集約**:
+1. **コンテンツの生成**:
    ```bash
    cd sharing
-   python3 ai-driven-coding.py
+   python3 career-content-generator.py
    ```
 
-2. **他のプロジェクトでの参照**:
-   - 生成された`ai-driven-coding.md`を他のリポジトリにコピー
-   - 各AIツールの設定ファイルで参照
+2. **テーマ別コンテンツ生成**:
+   ```bash
+   python3 career-content-generator.py --theme "リーダーシップ開発"
+   python3 career-content-generator.py --theme "ワークライフバランス"
+   ```
 
 ## 🛠️ 各AIツールの設定
 
 ### Claude Code CLI
 - `.claude/claude.yml`でシステムプロンプトとツール設定
-- `.claude/commands/gemini-search.md`でGemini検索機能
+- `.claude/commands/career-research.md`でキャリアリサーチ機能
 - `CLAUDE.md`で詳細な使用方法
 
 ### Cursor
-- `.cursor/rules/cursorrules.md`で開発ルールとベストプラクティス
-- プロジェクト固有のコーディング規約を定義
+- `.cursor/rules/cursorrules.md`でセミナー資料作成ルールとベストプラクティス
+- キャリアコンサルティング固有のコンテンツ作成規約を定義
 
 ### GitHub Actions
 - `.github/workflows/claude.yml`でCI/CD自動化
-- `.github/workflows/codex-tdd.yml`でTDDワークフロー
+- `.github/workflows/content-generation.yml`でコンテンツ生成ワークフロー
 
 ### Gemini CLI
 - `GEMINI.md`でGemini使用ガイドライン
-- ウェブ検索とコード生成のベストプラクティス
+- キャリアリサーチとコンテンツ生成のベストプラクティス
 
 ## 🔧 カスタマイズ
 
-### 新しいルールファイルの追加
-1. 適切なディレクトリにルールファイルを配置
-2. `sharing/ai-driven-coding.py`を更新して新しいファイルを含める
-3. ルールファイルを集約して`ai-driven-coding.md`を更新
+### 新しいセミナーテーマの追加
+1. `seminars/templates/`に新しいテンプレートを配置
+2. `sharing/career-content-generator.py`を更新して新しいテーマを含める
+3. 関連するリサーチ資料を`research/`に追加
 
 ### プロジェクト固有の設定
-- 各ルールファイルをプロジェクトの要件に合わせてカスタマイズ
+- 各ルールファイルをセミナーの要件に合わせてカスタマイズ
 - 環境変数やAPIキーの設定を適切に管理
 
 ## 📚 ベストプラクティス
 
-### AI駆動コーディング
-- **テスト駆動開発**: TDDサイクルを徹底
-- **継続的リファクタリング**: コードの品質を常に改善
-- **適切なコミット管理**: 機能単位でのコミット
-- **実験的実行**: workbenchディレクトリでの試行錯誤
+### セミナーコンテンツ作成
+- **参加者中心の設計**: 参加者のニーズに基づいたコンテンツ
+- **インタラクティブ要素**: 演習・ワークショップの組み込み
+- **実践的な内容**: 理論と実践のバランス
+- **継続的な改善**: フィードバックに基づくコンテンツ更新
 
-### ルールファイル管理
-- **一貫性の維持**: 複数プロジェクトで同じルールセットを使用
-- **定期的な更新**: 最新のベストプラクティスを反映
-- **バージョン管理**: ルールファイルの変更履歴を追跡
+### コンテンツ管理
+- **一貫性の維持**: 複数セミナーで統一された品質
+- **定期的な更新**: 最新のキャリアトレンドを反映
+- **バージョン管理**: コンテンツの変更履歴を追跡
 
 ### 環境管理
-- **環境チェックの徹底**: コード実行前に必ず`utility/check_env.py`を実行
+- **環境チェックの徹底**: コンテンツ生成前に必ず`utility/check_env.py`を実行
 - **仮想環境の適切な管理**: プロジェクト固有の環境を使用
 - **依存関係の管理**: requirements.txtの定期的な更新
 
 ## 🤝 貢献
 
 1. このリポジトリをフォーク
-2. 新しいルールファイルや改善を提案
+2. 新しいセミナーテーマや改善を提案
 3. プルリクエストを作成
 4. レビューとマージ
 
@@ -192,7 +200,7 @@ python sharing/ai-driven-coding.py
 
 ---
 
-**注意**: このテンプレートを使用する際は、プロジェクトの要件に合わせてルールファイルをカスタマイズしてください。また、コード実行前に必ず環境チェックスクリプトを実行してください。
+**注意**: このテンプレートを使用する際は、セミナーの要件に合わせてコンテンツをカスタマイズしてください。また、コンテンツ生成前に必ず環境チェックスクリプトを実行してください。
 
 
 
